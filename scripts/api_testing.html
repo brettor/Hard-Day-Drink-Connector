@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>API Testing</title>
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script>
+		var drunkApp = {};
+
+		drunkApp.key = `MDo0NWI4N2RkMC04NzZiLTExZTctOWNlZC1jN2M5MTg1ZDM3YjQ6WWtzc2dlWTZGU2JCRDFlNmFncjA2a1pVd3pOemFSUVhjeTdk`;
+
+		// a function that gets page number from API
+		drunkApp.getDrinks = function(){
+			// ajax request
+			$.ajax({
+				url: `https://lcboapi.com/products?price_per_liter_in_cents.desc&page=121`,
+				headers: {'Authorization':`Token ${drunkApp.key}`},
+				method: `GET`,
+				data: {
+					per_page: 100,
+				}
+			}).then((res) => {
+				console.log(res);
+			});
+		}
+		$(function(){
+			drunkApp.getDrinks();
+		});
+	</script>
+</body>
+</html>

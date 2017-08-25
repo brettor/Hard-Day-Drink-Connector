@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DrunkApp</title>
+	<link rel="stylesheet" href="styles/style.css"> <!-- link to CSS -->
+</head>
+<body>
+	<header>
+		<h1>Hard Day Drink Connector</h1>
+		<h5>The app that selects a drink based on what kind of day you're having and tells you where to get it</h5>
+	</header>
+	<main>
+		<section class="entry">
+			<form action=""> 
+				<label for="strength">How bad a day are you having?</label> <!-- alcohol_content -->
+				<select name="strength" id="strength">
+					<option value="good">Things are pretty good actually</option>
+					<option value="ok">Meh</option>
+					<option value="bad">Don't ask</option>
+					<option value="terrible">Aaaaaaaaah!!!</option>
+				</select>
+				<label for="energy">What time did you get up this morning?</label> <!-- package_unit_volume_in_milliliters -->
+				<select name="energy" id="energy">
+					<option value="late">I finally rolled out of bed around noon</option>
+					<option value="ontime">I just made it in time for work</option>
+					<option value="early">I got up at the crack of dawn</option>
+					<option value="allnight">Get up? I'm still up from yesterday</option>
+				</select>
+				<label for="cost">How are your finances, currently?</label> <!-- price_per_liter_in_cents -->
+				<select name="cost" id="cost">
+					<option value="rich">I'm rolling in it</option>
+					<option value="gettingby">Well enough to treat myself</option>
+					<option value="poor">I'm just scraping by</option>
+					<option value="destitute">Please sir, can I have some more?</option>
+				</select>
+				<label for="weather">How is the weather today?</label> <!-- primary_category -->
+				<select name="weather" id="weather">
+					<option value="sunny" data-drinktype="Ready-to-Drink/Coolers">The sun is shining</option>
+					<option value="cloudy" data-drinktype="Beer">It's overcast</option>
+					<option value="raining" data-drinktype="Wine">It's pouring buckets</option>
+					<option value="snowing" data-drinktype="Spirits">Break out the dogsleds!</option>
+				</select>
+				<button>Submit</button>
+			</form>
+		</section>
+		<section class="result">
+			<!-- empty until results generated -->
+		</section>
+	</main>
+	<footer>
+		<p>Created by Brett Nielsen using the LCBO API</p>
+		<img src="https://dx5vpyka4lqst.cloudfront.net/assets/lcboapi-wordmark.png" alt="LCBO API logo">
+	</footer>
+	<!-- scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> <!-- jQuery -->
+	<script src="scripts/script.js"></script> <!-- link to JS -->
+</body>
+</html>
