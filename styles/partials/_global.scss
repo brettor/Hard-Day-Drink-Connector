@@ -1,3 +1,55 @@
-img{
-	width: 100px;
+// general
+*{
+	margin: 0;
+	padding: 0;
+	line-height: 1;
 }
+html{
+	font-size: 62.5%;
+}
+body{
+	font-size: 2rem;
+	color: $fontColor;
+	background-image: linear-gradient(180deg, rgba(212,110,255,0.3), rgba(212,110,255,0.3)), url("../assets/light_wool.png");
+/* background patter from subtle patterns */
+}
+img{
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+}
+a{
+	color: inherit;
+	text-decoration: none;
+}
+ul{
+	list-style: none;
+}
+.wrapper{
+	width: 117rem;
+	margin: 0 auto;
+}
+// end general
+// header styles
+h1{
+	text-transform: uppercase;
+	text-align: center;
+	font-family: $headFont;
+	font-size: 5rem;
+	font-weight: 700;
+}
+// end header
+// main styles
+.display{
+	// display: none;
+}
+#map{
+	width: 25rem;
+	height: 25rem;
+}
+// end main
+// footer styles
+img{
+	width: 10rem;
+}
+// end footer

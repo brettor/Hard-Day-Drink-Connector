@@ -15,11 +15,12 @@
 		drunkApp.getDrinks = function(){
 			// ajax request
 			$.ajax({
-				url: `https://lcboapi.com/products?price_per_liter_in_cents.desc&page=121`,
+				url: `https://lcboapi.com/products?order=price_per_liter_of_alcohol_in_cents.desc`,
 				headers: {'Authorization':`Token ${drunkApp.key}`},
 				method: `GET`,
 				data: {
 					per_page: 100,
+					q: 'coolers'
 				}
 			}).then((res) => {
 				console.log(res);

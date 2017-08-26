@@ -57,34 +57,54 @@ drunkApp.events = function(data){
 	console.log(data);
 	var userWeather;
 	var userStrength;
-	var userEnergy;
+	var userSize;
 	var userCost;
 	$(`form`).on(`submit`, function(evt){
 		evt.preventDefault();
 		userWeather = $(`#weather`).find(`:selected`).data(`drinktype`);
 		userStrength = $(`#strength`).find(`:selected`).val();
-		userEnergy = $(`#energy`).find(`:selected`).val();
+		userSize = $(`#size`).find(`:selected`).val();
 		userCost = $(`#cost`).find(`:selected`).val();
-		var filteredDrinks = data.filter(function(item){
+		var filteredDrinks = data
+		.filter(function(item){
 			return userWeather === item.primary_category;
 		})
 		.filter(function(item){
 			// if statements
-			if (userWeather === `Ready-to-Drink/Coolers` || `Beer`){
+			if (userWeather === `Ready-to-Drink/Coolers`){
 				if (userStrength === `good`){
 				var strengthMin = 0;
-				var strengthMax = 449;
+				var strengthMax = 400;
 				}
 				else if (userStrength === `ok`){
-				var strengthMin = 450;
+				var strengthMin = 401;
+				var strengthMax = 500;
+				}
+				else if (userStrength === `bad`){
+				var strengthMin = 501;
+				var strengthMax = 699;
+				}
+				else {
+				var strengthMin = 701;
+				var strengthMax = 2000;
+				}
+				return item.alcohol_content >= strengthMin && item.alcohol_content <= strengthMax;
+			}
+			else if (userWeather === `Beer`){
+				if (userStrength === `good`){
+				var strengthMin = 0;
+				var strengthMax = 450;
+				}
+				else if (userStrength === `ok`){
+				var strengthMin = 451;
 				var strengthMax = 549;
 				}
 				else if (userStrength === `bad`){
 				var strengthMin = 550;
-				var strengthMax = 699;
+				var strengthMax = 700;
 				}
 				else {
-				var strengthMin = 700;
+				var strengthMin = 701;
 				var strengthMax = 10000;
 				}
 				return item.alcohol_content >= strengthMin && item.alcohol_content <= strengthMax;
@@ -111,64 +131,156 @@ drunkApp.events = function(data){
 			else {
 				if (userStrength === `good`){
 				var strengthMin = 0;
-				var strengthMax = 2499;
+				var strengthMax = 2500;
 				}
 				else if (userStrength === `ok`){
-				var strengthMin = 2500;
-				var strengthMax = 3999;
+				var strengthMin = 2501;
+				var strengthMax = 3499;
 				}
 				else if (userStrength === `bad`){
-				var strengthMin = 4000;
-				var strengthMax = 4999;
+				var strengthMin = 3500;
+				var strengthMax = 4499;
 				}
 				else {
-				var strengthMin = 5000;
+				var strengthMin = 4500;
 				var strengthMax = 10000;
 				}
 				return item.alcohol_content >= strengthMin && item.alcohol_content <= strengthMax;
 			}
 		})
 		.filter(function(item){
-			if (userEnergy === `late`){
-				var energyMin = 0;
-				var energyMax = 375;
+			if (userWeather === `Ready-to-Drink/Coolers` || `Beer`){
+				if (userSize === `late`){
+				var sizeMin = 0;
+				var sizeMax = 400;
 				}
-				else if (userEnergy === `ontime`){
-				var energyMin = 376;
-				var energyMax = 750;
+				else if (userSize === `ontime`){
+				var sizeMin = 401;
+				var sizeMax = 499;
 				}
-				else if (userEnergy === `early`){
-				var energyMin = 751;
-				var energyMax = 1140;
+				else if (userSize === `early`){
+				var sizeMin = 500;
+				var sizeMax = 699;
 				}
 				else {
-				var energyMin = 1141;
-				var energyMax = 100000;
+				var sizeMin = 700;
+				var sizeMax = 1000;
 				}
-			return item.package_unit_volume_in_milliliters >= energyMin && item.package_unit_volume_in_milliliters <= energyMax;
+				return item.package_unit_volume_in_milliliters >= sizeMin && item.package_unit_volume_in_milliliters <= sizeMax;
+			}
+			else {
+				if (userSize === `late`){
+				var sizeMin = 0;
+				var sizeMax = 375;
+				}
+				else if (userSize === `ontime`){
+				var sizeMin = 376;
+				var sizeMax = 750;
+				}
+				else if (userSize === `early`){
+				var sizeMin = 751;
+				var sizeMax = 1140;
+				}
+				else {
+				var sizeMin = 1141;
+				var sizeMax = 100000;
+				}
+				return item.package_unit_volume_in_milliliters >= sizeMin && item.package_unit_volume_in_milliliters <= sizeMax;
+			}
 		})
 		.filter(function(item){
 			if (userCost === `destitute`){
-				var costMin = 0;
-				var costMax = 999;
-				}
-				else if (userEnergy === `poor`){
-				var costMin = 1000;
-				var costMax = 1499;
-				}
-				else if (userEnergy === `gettingby`){
-				var costMin = 1500;
-				var costMax = 2499;
-				}
-				else {
-				var costMin = 2500;
-				var costMax = 25000000;
-				}
-			return item.price_per_liter_in_cents >= costMin && item.price_per_liter_in_cents <= costMax;
+			var costMin = 0;
+			var costMax = 1349;
+			}
+			else if (userCost === `poor`){
+			var costMin = 1350;
+			var costMax = 1749;
+			}
+			else if (userCost === `gettingby`){
+			var costMin = 1750;
+			var costMax = 2499;
+			}
+			else {
+			var costMin = 2500;
+			var costMax = 10000000;
+			}
+			return item.price_per_liter_of_alcohol_in_cents >= costMin && item.price_per_liter_of_alcohol_in_cents <= costMax;
 		});
-		console.log(filteredDrinks);
+		// return one product
+		if(filteredDrinks.length === 0){
+			drunkApp.selection = data[Math.floor(Math.random()*data.length)];
+		}
+		else{
+			drunkApp.selection = filteredDrinks[Math.floor(Math.random()*filteredDrinks.length)];
+		}
+		drunkApp.display(drunkApp.selection);
 	});
 }
+
+// a function that displays the information about the selected product
+drunkApp.display = function(selectedProduct){
+	$(`.result`).empty();
+	var selectedImage = $(`<img>`).attr(`src`, selectedProduct.image_url);
+	var selectedName = $(`<h2>`).text(selectedProduct.name);
+	var selectedSize = $(`<h4>`).text(selectedProduct.package);
+	var resultContainer = $(`<div>`).addClass(`product`).append(selectedImage, selectedName, selectedSize);
+	$(`.result`).append(resultContainer);
+	drunkApp.getUserLocation();
+}
+
+// a function that grabs the user's location
+drunkApp.getUserLocation = function(){
+	navigator.geolocation.getCurrentPosition(function(position){
+		drunkApp.userLocation = (position.coords);
+		drunkApp.getStores(position);
+	});
+}
+
+// a function that finds lcbos nearby with drunkApp.selection
+drunkApp.getStores = function(position){
+	var userLat = position.coords.latitude;
+	var userLon = position.coords.longitude;
+	var productId = drunkApp.selection.id;
+	$.ajax({
+		url: `https://lcboapi.com/stores?lat=${userLat}&lon=${userLon}&product_id=${productId}`,
+		headers: {'Authorization':`Token ${drunkApp.key}`},
+		method: `GET`,
+	})
+	.then((res) => {
+		drunkApp.nearbyStores = res.result.slice(0, 3);
+		drunkApp.displayMap();
+	});
+}
+
+// a function that displays map
+drunkApp.displayMap = function(){
+	initMap();
+}
+
+function initMap() {
+	var userLoc = {};
+	userLoc.lat = drunkApp.userLocation.latitude;
+	userLoc.lng = drunkApp.userLocation.longitude;
+	console.log(userLoc);
+	var map = new google.maps.Map(document.getElementById('map'), {
+	zoom: 13,
+	center: userLoc
+	});
+	var marker;
+	for(var i = 0; i < drunkApp.nearbyStores.length; i++){
+		var coordinates = {
+			lat: drunkApp.nearbyStores[i].latitude,
+			lng: drunkApp.nearbyStores[i].longitude,
+		};
+		marker = new google.maps.Marker({
+			position: coordinates,
+			map: map
+		});
+	}
+}
+
+// BONUS - "Sorry, no items match those conditions. Your day just got a little bit worse"
 
 // BONUS - a function that generates an image on the page based on responses
 // light day drinks with friends, feelin' tipsy, it's gonna be one of those nights etc.
