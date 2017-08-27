@@ -50,26 +50,26 @@ drunkApp.getAllDrinks = function(drinkData){
 	});
 }
 
-// BONUS - "Loading Data..." message until array has fully loaded
-
 // a function that handles events
 drunkApp.events = function(data){
-	console.log(data);
+	$(`.buttonContainer`).empty();
+	var tryButton = $(`<button>`).addClass(`generate`).text(`Submit`);
+	$(`.buttonContainer`).append(tryButton);
 	var userWeather;
 	var userStrength;
 	var userSize;
 	var userCost;
-	$(`form`).on(`submit`, function(evt){
+	$(`form`).on(`submit`, (evt) => {
 		evt.preventDefault();
 		userWeather = $(`#weather`).find(`:selected`).data(`drinktype`);
 		userStrength = $(`#strength`).find(`:selected`).val();
 		userSize = $(`#size`).find(`:selected`).val();
 		userCost = $(`#cost`).find(`:selected`).val();
 		var filteredDrinks = data
-		.filter(function(item){
+		.filter((item) => {
 			return userWeather === item.primary_category;
 		})
-		.filter(function(item){
+		.filter((item) => {
 			// if statements
 			if (userWeather === `Ready-to-Drink/Coolers`){
 				if (userStrength === `good`){
@@ -148,7 +148,7 @@ drunkApp.events = function(data){
 				return item.alcohol_content >= strengthMin && item.alcohol_content <= strengthMax;
 			}
 		})
-		.filter(function(item){
+		.filter((item) => {
 			if (userWeather === `Ready-to-Drink/Coolers` || `Beer`){
 				if (userSize === `late`){
 				var sizeMin = 0;
@@ -188,7 +188,7 @@ drunkApp.events = function(data){
 				return item.package_unit_volume_in_milliliters >= sizeMin && item.package_unit_volume_in_milliliters <= sizeMax;
 			}
 		})
-		.filter(function(item){
+		.filter((item) => {
 			if (userCost === `destitute`){
 			var costMin = 0;
 			var costMax = 1349;
@@ -235,13 +235,15 @@ drunkApp.display = function(selectedProduct){
 	var googleMap = $(`<div>`).attr(`id`, `map`);
 	var resultOne = $(`<div>`).addClass(`productOne`).append(displayText, selectedImage, selectedName, selectedSize);
 	var resultTwo = $(`<div>`).addClass(`productTwo`).append(displayLocation, googleMap);
-	var tryButton = $(`<button>`).addClass(`generate`).text(`Restart`);
-	$(`section`).append(resultOne, resultTwo, tryButton);
+	var retryButtonContainer = $(`<div>`).addClass(`buttonContainer`);
+	var retryButton = $(`<button>`).addClass(`regenerate`).text(`Restart`);
+	$(`section`).append(resultOne, resultTwo, retryButtonContainer);
+	$(`.buttonContainer`).append(retryButton);
 }
 
 // a function that grabs the user's location
 drunkApp.getUserLocation = function(){
-	navigator.geolocation.getCurrentPosition(function(position){
+	navigator.geolocation.getCurrentPosition((position) => {
 		drunkApp.userLocation = (position.coords);
 		drunkApp.getStores(position);
 	});
@@ -284,8 +286,7 @@ function initMap() {
 	}
 }
 
-// BONUS - a function that generates an image on the page based on responses
-// light day drinks with friends, feelin' tipsy, it's gonna be one of those nights etc.
+// a function that reloads the page when the restarts button is pushed
 
 // a function that initializes our code
 drunkApp.init = function(){
