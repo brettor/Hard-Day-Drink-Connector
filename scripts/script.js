@@ -223,14 +223,19 @@ drunkApp.display = function(selectedProduct){
 	$(`form`).addClass(`hidden`);
 	drunkApp.getUserLocation();
 	var displayText = $(`<h2>`).text(`Your suggested drink for this hard day is:`)
-	var selectedImage = $(`<img>`).attr(`src`, selectedProduct.image_url);
-	var selectedName = $(`<h2>`).text(selectedProduct.name);
-	var selectedSize = $(`<h3>`).text(selectedProduct.package);
+	if(selectedProduct.image_url === null){
+		var selectedImage = $(`<i>`).addClass(`fa`, `fa-glass`).attr(`aria-hidden`, `true`);
+	}
+	else{
+		var selectedImage = $(`<img>`).attr(`src`, selectedProduct.image_url);
+	}
+	var selectedName = $(`<h3>`).text(selectedProduct.name);
+	var selectedSize = $(`<h4>`).text(selectedProduct.package);
 	var displayLocation = $(`<h2>`).text(`Nearby stores with this drink in stock are:`)
 	var googleMap = $(`<div>`).attr(`id`, `map`);
 	var resultOne = $(`<div>`).addClass(`productOne`).append(displayText, selectedImage, selectedName, selectedSize);
-	var resultTwo = $(`<div>`).addClass(`productTwo`).append(displayText, googleMap);
-	var tryButton = $(`<button>`).addClass(`generate`);
+	var resultTwo = $(`<div>`).addClass(`productTwo`).append(displayLocation, googleMap);
+	var tryButton = $(`<button>`).addClass(`generate`).text(`Restart`);
 	$(`section`).append(resultOne, resultTwo, tryButton);
 }
 

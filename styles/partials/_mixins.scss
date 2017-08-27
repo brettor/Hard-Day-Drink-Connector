@@ -5,18 +5,18 @@
 		}
 	}
 	@else if $breakpoint == "medium" {
-			@media (max-width: 768px) {
-				@content;
-			}
+		@media (max-width: 768px) {
+			@content;
+		}
 	}
 	@else if $breakpoint == "large" {
-			@media (min-width: 769px) {
-				@content;
-			}
+		@media (max-width: 940px) {
+			@content;
+		}
 	}
-	@else if $breakpoint == "custom" {
-			@media (max-width: 940px) {
-				@content;
-			}
+	@else {
+		@media ($breakpoint) {
+			@content;
+		}
 	}
 }

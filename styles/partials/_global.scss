@@ -38,7 +38,6 @@ ul{
 .wrapper{
 	max-width: 117rem;
 	margin: 0 auto;
-	padding: 0 1rem;
 }
 // end general
 // header styles
@@ -61,7 +60,7 @@ h1{
 main{
 	text-align: center;
 	img{
-		margin: 0 auto;
+		margin: 1rem auto;
 		height: 15rem;
 		width: auto;
 	}
@@ -71,13 +70,13 @@ main{
 	color: $highlight;
 	font-size: 12rem;
 	text-align: center;
-	margin: 3rem 0;
+	margin: 2rem 0;
 }
 .fa-chevron-circle-down{
 	font-size: 5rem;
 	color: white;
 	position: absolute;
-	bottom: -1.5rem;
+	bottom: -0.5rem;
 	right: 1rem;
 	z-index: 1;
 }
@@ -92,8 +91,11 @@ main{
 		border-radius: 1rem;
 		font-weight: bold;
 		position: relative;
-		height: 32rem;
+		height: 33rem;
 	}
+}
+label{
+	line-height: 1.2;
 }
 select{
 	appearance: none;
@@ -117,6 +119,11 @@ select{
 option{
 	appearance: none;
 	border: none;
+	line-height: 1.2;
+	&:hover{
+		background: white;
+		color: $highlight;
+	}
 }
 button{
 	appearance: none;
@@ -131,25 +138,44 @@ button{
 	font-weight: bold;
 	font-size: 2.5rem;
 	&:hover{
-
+		background: white;
+		color: $background;
+		border: 2px solid $background;
 	}
 }
 h2{
-	font-size: 2rem;
+	font-size: 2.4rem;
+	margin-bottom: 2rem;
 }
 h3{
-	font-size: 1.4rem;
+	font-size: 2.6rem;
+	margin: 2rem 0;
+	color: $background;
+}
+h4{
+	font-size: 2rem;
+	color: $background;
 }
 .hidden{
 	display: none;
 }
+section{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
 #map{
-	width: 35rem;
+	width: 40rem;
 	height: 25rem;
 	margin: 0 auto;
 }
 .productOne, .productTwo{
-
+	width: calc(50% - 2rem);
+	background: white;
+	border-radius: 1rem;
+	margin: 0 1rem;
+	padding: 3rem;
+	border: 2px solid $highlight;
 }
 // end main
 // footer styles
@@ -158,6 +184,7 @@ footer{
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		padding: 0 1rem;
 	}
 }
 p{
