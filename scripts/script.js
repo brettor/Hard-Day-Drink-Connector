@@ -220,13 +220,15 @@ drunkApp.events = function(data){
 
 // a function that displays the information about the selected product
 drunkApp.display = function(selectedProduct){
-	$(`.result`).empty();
+	$(`form`).addClass(`hidden`);
+	drunkApp.getUserLocation();
+	var displayText = $(`<h2>`).text(`Your suggested drink for this hard day is:`)
 	var selectedImage = $(`<img>`).attr(`src`, selectedProduct.image_url);
 	var selectedName = $(`<h2>`).text(selectedProduct.name);
-	var selectedSize = $(`<h4>`).text(selectedProduct.package);
-	var resultContainer = $(`<div>`).addClass(`product`).append(selectedImage, selectedName, selectedSize);
-	$(`.result`).append(resultContainer);
-	drunkApp.getUserLocation();
+	var selectedSize = $(`<h3>`).text(selectedProduct.package);
+	var googleMap = $(`<div>`).attr(`id`, `map`);
+	var resultContainer = $(`<div>`).addClass(`product`).append(displayText, selectedImage, selectedName, selectedSize, googleMap);
+	$(`section`).append(resultContainer);
 }
 
 // a function that grabs the user's location
@@ -249,22 +251,16 @@ drunkApp.getStores = function(position){
 	})
 	.then((res) => {
 		drunkApp.nearbyStores = res.result.slice(0, 3);
-		drunkApp.displayMap();
+		initMap();
 	});
-}
-
-// a function that displays map
-drunkApp.displayMap = function(){
-	initMap();
 }
 
 function initMap() {
 	var userLoc = {};
 	userLoc.lat = drunkApp.userLocation.latitude;
 	userLoc.lng = drunkApp.userLocation.longitude;
-	console.log(userLoc);
 	var map = new google.maps.Map(document.getElementById('map'), {
-	zoom: 13,
+	zoom: 12,
 	center: userLoc
 	});
 	var marker;
@@ -279,8 +275,6 @@ function initMap() {
 		});
 	}
 }
-
-// BONUS - "Sorry, no items match those conditions. Your day just got a little bit worse"
 
 // BONUS - a function that generates an image on the page based on responses
 // light day drinks with friends, feelin' tipsy, it's gonna be one of those nights etc.

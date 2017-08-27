@@ -3,15 +3,24 @@
 	margin: 0;
 	padding: 0;
 	line-height: 1;
+	// border: 1px solid blue;
 }
 html{
 	font-size: 62.5%;
+	height: 97vh;
 }
 body{
 	font-size: 2rem;
 	color: $fontColor;
-	background-image: linear-gradient(180deg, rgba(212,110,255,0.3), rgba(212,110,255,0.3)), url("../assets/light_wool.png");
+	background-image: linear-gradient(180deg, rgba(156, 39, 176, 0.3), rgba(156, 39, 176, 0.3)), url("../assets/light_wool.png");
 /* background patter from subtle patterns */
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 img{
 	display: block;
@@ -37,19 +46,58 @@ h1{
 	font-family: $headFont;
 	font-size: 5rem;
 	font-weight: 700;
+	width: 50%;
+	margin: 0 auto;
+	span{
+		color: $highlight;
+	}
 }
 // end header
 // main styles
-.display{
-	// display: none;
+main{
+	text-align: center;
+	img{
+		margin: 0 auto;
+		height: 15rem;
+		width: auto;
+	}
+}
+.options{
+	display: flex;
+	justify-content: space-between;
+	div{
+		width: 25%;
+		padding: 0 2rem;
+	}
+}
+select{
+	width: 100%;
+}
+h2{
+	font-size: 2rem;
+}
+h3{
+	font-size: 1.4rem;
+}
+.hidden{
+	display: none;
 }
 #map{
-	width: 25rem;
+	width: 35rem;
 	height: 25rem;
+	margin: 0 auto;
 }
 // end main
 // footer styles
+footer{
+	.wrapper{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
 img{
 	width: 10rem;
+	height: auto;
 }
 // end footer
