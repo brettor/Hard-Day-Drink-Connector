@@ -226,9 +226,12 @@ drunkApp.display = function(selectedProduct){
 	var selectedImage = $(`<img>`).attr(`src`, selectedProduct.image_url);
 	var selectedName = $(`<h2>`).text(selectedProduct.name);
 	var selectedSize = $(`<h3>`).text(selectedProduct.package);
+	var displayLocation = $(`<h2>`).text(`Nearby stores with this drink in stock are:`)
 	var googleMap = $(`<div>`).attr(`id`, `map`);
-	var resultContainer = $(`<div>`).addClass(`product`).append(displayText, selectedImage, selectedName, selectedSize, googleMap);
-	$(`section`).append(resultContainer);
+	var resultOne = $(`<div>`).addClass(`productOne`).append(displayText, selectedImage, selectedName, selectedSize);
+	var resultTwo = $(`<div>`).addClass(`productTwo`).append(displayText, googleMap);
+	var tryButton = $(`<button>`).addClass(`generate`);
+	$(`section`).append(resultOne, resultTwo, tryButton);
 }
 
 // a function that grabs the user's location
