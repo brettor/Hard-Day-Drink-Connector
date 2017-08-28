@@ -224,7 +224,7 @@ drunkApp.display = function(selectedProduct){
 	drunkApp.getUserLocation();
 	var displayText = $(`<h2>`).text(`Your suggested drink for this hard day is:`)
 	if(selectedProduct.image_url === null){
-		var selectedImage = $(`<i>`).addClass(`fa`, `fa-glass`).attr(`aria-hidden`, `true`);
+		var selectedImage = $(`<i>`).addClass(`fa fa-glass`).attr(`aria-hidden`, true);
 	}
 	else{
 		var selectedImage = $(`<img>`).attr(`src`, selectedProduct.image_url);
@@ -284,9 +284,22 @@ function initMap() {
 			map: map
 		});
 	}
+	drunkApp.reload();
 }
 
-// a function that reloads the page when the restarts button is pushed
+// a function that reloads the page when the restarts button is clicked
+drunkApp.reload = function(){
+	$(`.regenerate`).on(`click`, function(){
+		$(`.productOne`).remove();
+		$(`.productTwo`).remove();
+		$(`.buttonContainer`).remove();
+		$(`form`).removeClass(`hidden`);
+		var tryButtonContainer = $(`<div>`).addClass(`buttonContainer`);
+		var tryButton = $(`<button>`).addClass(`generate`).text(`Submit`);
+		$(`form`).append(tryButtonContainer);
+		$(`.buttonContainer`).append(tryButton);
+	});
+}
 
 // a function that initializes our code
 drunkApp.init = function(){

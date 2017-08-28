@@ -49,10 +49,12 @@ h1{
 	font-weight: 700;
 	width: 50%;
 	margin: 3rem auto;
-	margin-bottom: 0;
 	text-shadow: 1px 1px 2px $background;
 	span{
 		color: $highlight;
+	}
+	@include responsive("medium"){
+		width: 100%;
 	}
 }
 // end header
@@ -79,10 +81,25 @@ main{
 	bottom: -0.5rem;
 	right: 1rem;
 	z-index: 1;
+	@include responsive("custom"){
+		bottom: 0.5rem;
+	}
+	@include responsive("large"){
+		bottom: -0.5rem;
+	}
+	@include responsive("medium"){
+		bottom: 0.5rem;
+	}
+	@include responsive("small"){
+		bottom: -0.5rem;
+	}
 }
 .options{
 	display: flex;
 	justify-content: space-between;
+	@include responsive("large"){
+		flex-wrap: wrap;
+	}
 	div{
 		width: 25%;
 		margin: 0 1rem;
@@ -92,6 +109,19 @@ main{
 		font-weight: bold;
 		position: relative;
 		height: 33rem;
+		@include responsive("large"){
+			width: calc(50% - 2rem);
+			margin-top: 2rem;
+			height: 30rem;
+		}
+		@include responsive("medium"){
+			height: 33rem;
+		}
+		@include responsive("small"){
+			width: calc(100% - 2rem);
+			margin-top: 2rem;
+			height: 30rem;
+		}
 	}
 }
 label{
@@ -115,6 +145,18 @@ select{
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	@include responsive("custom"){
+		height: 10rem;
+	}
+	@include responsive("large"){
+		height: 8rem;
+	}
+	@include responsive("medium"){
+		height: 10rem;
+	}
+	@include responsive("small"){
+		height: 8rem;
+	}
 }
 option{
 	appearance: none;
@@ -126,7 +168,7 @@ option{
 	}
 }
 .fa-spinner{
-	font-size: 5rem;
+	font-size: 6rem;
 	color: $background;
 	margin: 0 auto;
 	margin-top: 4rem;
@@ -169,12 +211,19 @@ section{
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+	@include responsive("large"){
+		flex-direction: column;
+	}
 }
 #map{
-	width: 40rem;
 	height: 25rem;
+	width: 85%;
 	margin: 0 auto;
 	border: 2px solid $background;
+	border-radius: 0.5rem;
+	@include responsive("small"){
+		width: auto;
+	}
 }
 .productOne, .productTwo{
 	width: calc(50% - 2rem);
@@ -183,20 +232,37 @@ section{
 	margin: 0 1rem;
 	padding: 3rem;
 	border: 2px solid $highlight;
+	@include responsive("large"){
+		width: 75%;
+		margin: 0 auto;
+	}
+	@include responsive("medium"){
+		width: calc(100% - 2rem);
+	}
 	i{
 		margin: 1rem auto;
 		height: 15rem;
 		width: auto;
 	}
 }
+.productOne{
+	@include responsive("large"){
+		margin-bottom: 4rem;
+	}
+}
 // end main
 // footer styles
 footer{
+	margin-top: 2rem;
+	padding-bottom: 1rem;
 	.wrapper{
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 1rem;
+		@include responsive("small"){
+			flex-direction: column;
+		}
 	}
 }
 p{
@@ -205,5 +271,8 @@ p{
 img{
 	width: 10rem;
 	height: auto;
+	@include responsive("small"){
+		margin-top: 2rem;
+	}
 }
 // end footer

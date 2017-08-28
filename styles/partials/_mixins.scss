@@ -14,6 +14,11 @@
 			@content;
 		}
 	}
+	@else if $breakpoint == "custom" {
+		@media (max-width: 1105px) {
+			@content;
+		}
+	}
 	@else {
 		@media ($breakpoint) {
 			@content;
