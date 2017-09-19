@@ -1,6 +1,6 @@
 var drunkApp = {};
 
-drunkApp.key = `MDo0NWI4N2RkMC04NzZiLTExZTctOWNlZC1jN2M5MTg1ZDM3YjQ6WWtzc2dlWTZGU2JCRDFlNmFncjA2a1pVd3pOemFSUVhjeTdk`;
+drunkApp.key = `MDo1NGZkODFjMi05ZDRjLTExZTctODcxNy0yM2I4ODc3ZmQ3ZDk6NUdxMkh0ZE0zaUx5amo5SDkxd3hoWjJBV1NwQTBJblhZRVhW`;
 
 // a function that gets page number from API
 drunkApp.getDrinks = function(){
